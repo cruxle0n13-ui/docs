@@ -1,0 +1,34 @@
+```text Project layout
+my-agent/
+├── agent.py                        # Core agent definition
+
+├── instructions.md                 # Managed context
+├── skills/
+│   └── <name>/
+│       └── SKILL.md
+
+├── tools/                          # Application code
+├── middleware/
+
+├── channels/                       # Managed configuration
+│   └── <name>.py
+├── schedules/
+│   └── <name>.py
+├── sandbox/
+│   └── __init__.py
+├── identity.py
+├── memory.py
+
+├── pyproject.toml                  # Dependencies and secrets
+├── .env
+
+├── evals/                          # Harbor evals
+│   └── tasks/
+│       └── <task>/
+
+└── mda_evals/                      # Optional MDA eval shortcuts
+    └── <task>/
+```
+
+
+

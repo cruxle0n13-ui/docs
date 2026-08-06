@@ -1,0 +1,34 @@
+
+
+```text Project layout
+my-agent/
+├── agent.ts | agent.tsx            # Core agent definition
+
+├── instructions.md                 # Managed context
+├── skills/
+│   └── <name>/
+│       └── SKILL.md
+
+├── tools/                          # Application code
+├── middleware/
+
+├── channels/                       # Managed configuration
+│   └── <name>.ts
+├── schedules/
+│   └── <name>.ts
+├── sandbox/
+│   └── index.ts
+├── identity.ts
+├── memory.ts
+
+├── package.json                    # Dependencies and secrets
+├── .env
+
+├── evals/                          # Harbor evals
+│   └── tasks/
+│       └── <task>/
+
+└── mda_evals/                      # Optional MDA eval shortcuts
+    └── <task>/
+```
+
