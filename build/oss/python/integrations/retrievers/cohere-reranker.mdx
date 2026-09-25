@@ -306,6 +306,9 @@ You can of course use this retriever within a QA pipeline
 
 
 ```python
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+
 client = Client()
 prompt = client.pull_prompt("rlm/rag-prompt", include_model=True)
 
@@ -336,7 +339,7 @@ qa_chain.invoke("What did the president say about Ketanji Jackson Brown?")
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/retrievers/cohere-reranker.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

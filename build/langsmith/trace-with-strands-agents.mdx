@@ -31,7 +31,7 @@ This installs LangSmith, Strands Agents, Strands Agents tools, and the OpenTelem
 Set your [LangSmith API key](/langsmith/create-account-api-key) and project name. If you use Amazon Bedrock as the model provider for Strands Agents, also configure AWS credentials with your preferred AWS authentication method.
 
 ```bash
-export OTEL_EXPORTER_OTLP_ENDPOINT=https://api.smith.langchain.com/otel/v1/traces
+export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=https://api.smith.langchain.com/otel/v1/traces
 export OTEL_EXPORTER_OTLP_HEADERS="x-api-key=<your_langsmith_api_key>,Langsmith-Project=<your_project_name>"
 
 # Required when using Amazon Bedrock.
@@ -116,7 +116,7 @@ Use this approach when you want to configure exporter options in code instead of
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/trace-with-strands-agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

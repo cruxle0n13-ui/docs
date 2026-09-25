@@ -15,7 +15,7 @@ integration:
 
 | Class | Package | Serializable | [JS support](https://js.langchain.com/docs/integrations/tools/) |  Version |
 |:------|:--------|:------------:|:---------------------------------------------------------------:|:--------:|
-| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ✅ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square&label=%20) |
+| [`BrowserToolkit`](https://github.com/langchain-ai/langchain-aws/tree/main/libs/aws/langchain_aws/tools) | [`langchain-aws`](https://pypi.org/project/langchain-aws/) | ❌ | ❌ | ![PyPI - Version](https://img.shields.io/pypi/v/langchain-aws?style=flat-square&label=%20) |
 
 ### Tool features
 
@@ -214,7 +214,7 @@ print(text)
 
 ```python
 import asyncio
-from langchain.agents import create_react_agent
+from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain_aws.tools import create_browser_toolkit
 
@@ -229,7 +229,7 @@ async def main():
     )
 
     # Create agent with browser tools
-    agent = create_react_agent(
+    agent = create_agent(
         model=llm,
         tools=browser_tools,
     )
@@ -394,7 +394,7 @@ For detailed documentation of all features and configurations, see:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/bedrock_agentcore_browser.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

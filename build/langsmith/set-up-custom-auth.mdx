@@ -153,6 +153,12 @@ If you didn't add the `--no-browser`, the Studio UI will open in the browser. By
 }
 ```
 
+To accept LangSmith API keys (`x-api-key`) alongside your custom handler outside of Studio, set `allow_langsmith_api_keys: true`. Requests with an `Authorization` header still use custom auth. All other requests use LangSmith auth. Set the `x-auth-scheme: langsmith` header to force LangSmith auth even when `Authorization` is present. LangSmith-authenticated callers expose `ctx.user.identity` as the LangSmith user ID (or missing) and `ctx.permissions` as `["authenticated"]`. Custom `@auth.on` handlers still run, so design them to accept that shape if both paths should share resource rules. This option requires `disable_studio_auth` unset or `false`.
+
+<Note>
+`allow_langsmith_api_keys` requires Agent Server `0.14.0rc2` or later.
+</Note>
+
 ## 4. Chat with your bot
 
 You should now only be able to access the bot if you provide a valid token in the request header. Users will still, however, be able to access each other's resources until you add [resource authorization handlers](/langsmith/auth#resource-specific-handlers) in the next section of the tutorial.
@@ -217,7 +223,7 @@ Now that you can control who accesses your bot, you might want to:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/set-up-custom-auth.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

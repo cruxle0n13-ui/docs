@@ -10,6 +10,7 @@ import ToolReturnCommandPy from '/snippets/javascript/code-samples/tool-return-c
 import ToolReturnCommandJs from '/snippets/javascript/code-samples/tool-return-command-js.mdx';
 import ToolReturnDirectPy from '/snippets/javascript/code-samples/tool-return-direct-py.mdx';
 import ToolReturnDirectJs from '/snippets/javascript/code-samples/tool-return-direct-js.mdx';
+import ToolReturnDirectCommandPy from '/snippets/javascript/code-samples/tool-return-direct-command-py.mdx';
 import ToolUpdateStatePy from '/snippets/javascript/code-samples/tool-update-state-py.mdx';
 import ToolErrorHandlingPy from '/snippets/javascript/code-samples/tool-error-handling-py.mdx';
 import ToolErrorHandlingJs from '/snippets/javascript/code-samples/tool-error-handling-js.mdx';
@@ -92,6 +93,10 @@ The [`BaseStore`](https://reference.langchain.com/javascript/langchain-core/stor
 
 
 Access the store through `config.store`. The store uses a namespace/key pattern to organize data:
+
+<Tip>
+    For production deployments, use a persistent store implementation like [`PostgresStore`](https://reference.langchain.com/javascript/langchain-langgraph-checkpoint-postgres/store/PostgresStore), `MongoDBStore`, or `RedisStore` instead of `InMemoryStore`. See the [memory documentation](/oss/javascript/langgraph/add-memory) for setup details.
+</Tip>
 
 ```ts expandable
 import * as z from "zod";
@@ -358,13 +363,20 @@ Behavior:
 - Use `message.content_blocks` to read the normalized block list after the tool runs.
 - The model must support the modalities you return. Check your [model's capabilities](/oss/javascript/integrations/chat) before returning images, audio, or video.
 
-For block types and provider-specific requirements, see [Multimodal messages](/oss/javascript/langchain/messages#multimodal). MCP tools that return images or mixed content are converted the same way; see [Multimodal tool content](/oss/javascript/langchain/mcp#multimodal-tool-content).
+For block types and provider-specific requirements, see [Multimodal messages](/oss/javascript/langchain/messages#multimodal).
+
+
 
 #### Return a Command
 
 Return a [`Command`](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) when the tool needs to update graph state (for example, setting user preferences or app state).
-You can return a `Command` with or without including a `ToolMessage`.
-If the model needs to see that the tool succeeded (for example, to confirm a preference change), include a `ToolMessage` in the update, using `runtime.tool_call_id` for the `tool_call_id` parameter.
+When the `Command` targets the current graph, include a `ToolMessage` in the update whose tool call ID matches the current tool call.
+Every tool call in the message history must have a corresponding `ToolMessage`.
+
+
+
+Use `runtime.toolCallId` for the `tool_call_id` parameter.
+
 
 
 
@@ -394,17 +406,23 @@ Behavior:
 
 - The tool executes normally and its output is wrapped in a `ToolMessage`.
 - The agent stops looping and returns the tool's output as the final response, bypassing any additional model call.
-- If the model calls multiple tools in a single turn, `return_direct` takes effect only when **all** called tools have `return_direct=True`.
+- **Multiple parallel tool calls:** When the model calls several tools in one step, all of them execute first. After all tools finish, the agent routes to `END` only if **every** tool in that batch has `return_direct=True`. The final response includes the `ToolMessage` outputs of every tool that was called in that step.
 
 Use this when:
 
 - The tool's output is the complete, user-ready answer (for example, a lookup that returns a ready-to-display result).
 - You want to avoid an extra model call when no additional reasoning is needed.
-- You need deterministic, unmodified output — the model cannot rephrase, summarize, or act on the tool result.
+- You need deterministic, unmodified output: the model cannot rephrase, summarize, or act on the tool result.
 
 <Warning>
     Because the model does not process the tool's output, `return_direct=True` is not suitable for tools whose results require further reasoning, summarization, or chaining with other tool calls.
 </Warning>
+
+<Warning>
+    **Mixed parallel calls:** If the model calls a `return_direct=True` tool alongside tools that do not have `return_direct=True`, the agent does **not** exit after that step. It routes back to the model with every `ToolMessage` from the batch, so the model can reason over all results. `return_direct` only short-circuits the loop when every tool call in the step has `return_direct=True`.
+</Warning>
+
+
 
 ### Error handling
 
@@ -724,6 +742,17 @@ LangChain provides a large collection of prebuilt tools and toolkits for common 
 
 See the [tools and toolkits](/oss/javascript/integrations/tools) integration page for a complete list of available tools organized by category.
 
+## Tools from MCP servers
+
+[Model Context Protocol (MCP)](https://modelcontextprotocol.io) is an open protocol that standardizes how applications expose tools to language models. Rather than hand-authoring a tool, you connect to an MCP server and adapt the tools it advertises into LangChain tools, ready to pass to an agent like any other tool.
+
+
+
+LangChain agents call tools defined on MCP servers through the [`@langchain/mcp-adapters`](https://github.com/langchain-ai/langchainjs/tree/main/libs/langchain-mcp-adapters) library, which discovers a server's tools and adapts them into LangChain tools.
+
+For setup, transports, and authentication, see [Model Context Protocol (MCP)](/oss/javascript/langchain/mcp).
+
+
 ## Server-side tool use
 
 Some chat models feature built-in tools that are executed server-side by the model provider. These include capabilities like web search and code interpreters that don't require you to define or host the tool logic.
@@ -734,7 +763,7 @@ Refer to the individual [chat model integration pages](/oss/javascript/integrati
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -124,7 +124,7 @@ LangChain automatically uses `ProviderStrategy` when you pass a schema type dire
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ContactInfo  # Auto-selects ProviderStrategy
     )
 
@@ -149,7 +149,7 @@ LangChain automatically uses `ProviderStrategy` when you pass a schema type dire
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ContactInfo  # Auto-selects ProviderStrategy
     )
 
@@ -180,7 +180,7 @@ LangChain automatically uses `ProviderStrategy` when you pass a schema type dire
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ProviderStrategy(contact_info_schema)
     )
 
@@ -265,7 +265,7 @@ class ToolStrategy(Generic[SchemaT]):
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ToolStrategy(ProductReview)
     )
 
@@ -292,7 +292,7 @@ class ToolStrategy(Generic[SchemaT]):
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ToolStrategy(ProductReview)
     )
 
@@ -318,7 +318,7 @@ class ToolStrategy(Generic[SchemaT]):
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ToolStrategy(ProductReview)
     )
 
@@ -361,7 +361,7 @@ class ToolStrategy(Generic[SchemaT]):
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ToolStrategy(product_review_schema)
     )
 
@@ -393,7 +393,7 @@ class ToolStrategy(Generic[SchemaT]):
 
     agent = create_agent(
         model="gpt-5.5",
-        tools=tools,
+        tools=[],
         response_format=ToolStrategy(Union[ProductReview, CustomerComplaint])
     )
 
@@ -714,7 +714,7 @@ response_format = ToolStrategy(
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/structured-output.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

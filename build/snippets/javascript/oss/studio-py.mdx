@@ -17,11 +17,17 @@ Before you begin, ensure you have the following:
 ### 1. Install the LangGraph CLI
 
 The [LangGraph CLI](/langsmith/cli) provides a local development server (also called [Agent Server](/langsmith/agent-server)) that connects your agent to Studio.
+<CodeGroup>
+    ```bash pip
+    # Python >= 3.11 is required.
+    pip install -U "langgraph-cli[inmem]"
+    ```
 
-```shell
-# Python >= 3.11 is required.
-pip install --upgrade "langgraph-cli[inmem]"
-```
+    ```bash uv
+    # Python >= 3.11 is required.
+    uv add "langgraph-cli[inmem]"
+    ```
+</CodeGroup>
 
 ### 2. Prepare your agent
 
@@ -74,7 +80,7 @@ The LangGraph CLI uses a configuration file to locate your agent and manage depe
 }
 ```
 
-The [`create_agent`](https://reference.langchain.com/python/langchain/agents/factory/create_agent) function automatically returns a compiled LangGraph graph, which is what the `graphs` key expects in the configuration file.
+The [`create_agent`](https://reference.langchain.com/javascript/langchain/index/createAgent) function automatically returns a compiled LangGraph graph, which is what the `graphs` key expects in the configuration file.
 
 <Info>
 For detailed explanations of each key in the JSON object of the configuration file, refer to the [LangGraph configuration file reference](/langsmith/cli#configuration-file).

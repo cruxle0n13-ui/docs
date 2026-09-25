@@ -2,6 +2,9 @@
 title: Messages
 ---
 
+import MessageSerializationPy from '/snippets/python/code-samples/message-serialization-py.mdx';
+import MessageSerializationJs from '/snippets/python/code-samples/message-serialization-js.mdx';
+
 {/* TODO: section on metadata types (response and usage) */}
 
 Messages are the fundamental unit of context for models in LangChain. They represent the input and output of models, carrying both the content and metadata needed to represent the state of a conversation when interacting with an LLM.
@@ -1025,6 +1028,23 @@ Content blocks are represented (either when creating a message or accessing the 
     Content blocks are not a replacement for the [`content`](https://reference.langchain.com/python/langchain-core/messages/base/BaseMessage) property, but rather a new property that can be used to access the content of a message in a standardized format.
 </Info>
 
+## Serialization
+
+You can serialize messages to plain objects for storage and deserialize back to message instances. This is useful for persisting conversation history and resuming sessions.
+
+<MessageSerializationPy />
+
+
+
+
+
+<Warning>
+**`load()` instantiates Python objects and can trigger side effects during deserialization. Never call `load()` on data from an untrusted or unauthenticated source.**
+</Warning>
+
+
+
+
 ## Use with chat models
 
 [Chat models](/oss/python/langchain/models) accept a sequence of message objects as input and return an [`AIMessage`](https://reference.langchain.com/python/langchain-core/messages/ai/AIMessage) as output. Interactions are often stateless, so that a simple conversational loop involves invoking a model with a growing list of messages.
@@ -1038,7 +1058,7 @@ Refer to the below guides to learn more:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/messages.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -11,6 +11,7 @@ LangChain provides [`GenericFakeChatModel`](https://reference.langchain.com/pyth
 
 ```python
 from langchain_core.language_models.fake_chat_models import GenericFakeChatModel
+from langchain.messages import AIMessage, ToolCall
 
 model = GenericFakeChatModel(messages=iter([
     AIMessage(content="", tool_calls=[ToolCall(name="foo", args={"bar": "baz"}, id="call_1")]),
@@ -34,6 +35,8 @@ To enable persistence during testing, you can use the [`InMemorySaver`](https://
 
 ```python
 from langgraph.checkpoint.memory import InMemorySaver
+from langchain.agents import create_agent
+from langchain.messages import HumanMessage
 
 agent = create_agent(
     model,
@@ -65,7 +68,7 @@ Learn how to test your agent with real model provider APIs in [Integration testi
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/test/unit-testing.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

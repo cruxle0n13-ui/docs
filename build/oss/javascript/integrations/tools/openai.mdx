@@ -326,6 +326,8 @@ const response = await model.invoke("A serene lake at dawn", {
 **Multi-turn editing** - Refine images across conversation turns:
 
 ```typescript
+import { HumanMessage } from "@langchain/core/messages";
+
 // First turn: generate initial image
 const response1 = await model.invoke("Draw a red car", {
   tools: [tools.imageGeneration()],
@@ -593,7 +595,7 @@ For more information, see [OpenAI's Apply Patch Documentation](https://platform.
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/tools/openai.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -102,6 +102,8 @@ A chat model takes parameters that can be used to configure its behavior. The fu
 
 <ParamField body="maxRetries" type="number" default="6">
     The maximum number of attempts the system will make to resend a request if it fails due to issues like network timeouts or rate limits. Retries use exponential backoff with jitter. Network errors, rate limits (429), and server errors (5xx) are retried automatically. Client errors such as 401 (unauthorized) or 404 are not retried. For long-running [agent](/oss/javascript/deepagents/overview) tasks on unreliable networks, consider increasing this to 10–15.
+
+    On providers that support it, [model retry middleware](/oss/javascript/langchain/middleware/built-in#model-retry) takes over retries for the calls it wraps, and this value does not apply to them.
 </ParamField>
 
 
@@ -505,7 +507,7 @@ Below, we show some common ways you can use tool calling.
         console.log(response.tool_calls)
         // [
         //   { name: 'get_weather', args: { location: 'Boston' }, id: 'call_1' },
-        //   { name: 'get_time', args: { location: 'Tokyo' }, id: 'call_2' }
+        //   { name: 'get_weather', args: { location: 'Tokyo' }, id: 'call_2' }
         // ]
 
 
@@ -932,6 +934,8 @@ See the [integration page](/oss/javascript/integrations/chat) for your given pro
 
 
 
+
+
 ### Base URL and proxy settings
 
 You can configure a custom base URL for providers that implement the OpenAI Chat Completions API.
@@ -1089,7 +1093,7 @@ const dynamicModelSelection = createMiddleware({
 
 const agent = createAgent({
   model: "gpt-5.4-mini", // Base model (used when messageCount ≤ 10)
-  tools,
+  tools: [],
   middleware: [dynamicModelSelection],
 });
 ```
@@ -1105,7 +1109,7 @@ For model configuration details, see [Models](/oss/javascript/langchain/models).
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/models.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

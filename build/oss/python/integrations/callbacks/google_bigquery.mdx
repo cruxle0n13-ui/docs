@@ -148,10 +148,10 @@ def run_agent_example(project_id: str):
     )
 
     # 3. Create the LLM and agent
-    # Use project parameter for Vertex AI, or api_key for Gemini Developer API
+    # Use project parameter for Gemini Enterprise Agent Platform, or api_key for Gemini Developer API
     llm = ChatGoogleGenerativeAI(
         model="gemini-2.5-flash",
-        project=project_id,  # For Vertex AI
+        project=project_id,  # For Gemini Enterprise Agent Platform
     )
     tools = [get_current_time, get_weather, convert_currency]
     agent = create_agent(llm, tools)
@@ -881,7 +881,7 @@ We welcome your feedback on BigQuery Agent Analytics. If you have questions, sug
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/callbacks/google_bigquery.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

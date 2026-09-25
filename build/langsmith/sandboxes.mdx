@@ -18,8 +18,19 @@ From the [LangSmith homepage](https://smith.langchain.com?utm_source=docs&utm_me
 | GCP EU (`eu.smith.langchain.com`) | Generally available |
 | GCP APAC (`apac.smith.langchain.com`) | Generally available |
 | AWS US (`aws.smith.langchain.com`) | Generally available |
+| [BYOC](/langsmith/byoc) (your data plane URL) | Generally available |
+
+<Warning>
+On BYOC, use an API key that belongs to a BYOC workspace.
+</Warning>
 
 For self-hosted LangSmith deployments, see [Enable Sandboxes on self-hosted deployments](/langsmith/deploy-self-hosted-full-platform#enable-sandboxes).
+
+## Network access
+
+Restricted egress applies to non-Enterprise organizations by default and to organizations that request it. Organizations with an approved exemption can use unrestricted egress. Restricted sandboxes use a managed allowlist for common package registries, source repositories, and model APIs. LangSmith blocks destinations outside the allowlist, even if you add them to a sandbox's proxy configuration.
+
+If you need unrestricted egress, [file a support ticket](https://support.langchain.com) with your organization or workspace ID, region, required destinations and ports, and use case. For more information, see [restricted egress and access requests](/langsmith/sandbox-auth-proxy#organization-level-restricted-egress).
 
 ## Get started
 
@@ -131,7 +142,7 @@ To wire sandboxes into agent code, see the Open Source docs:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/sandboxes.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

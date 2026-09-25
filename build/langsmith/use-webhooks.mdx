@@ -3,6 +3,10 @@ title: Use webhooks
 sidebarTitle: Webhooks
 ---
 
+<Note>
+  This page covers **LangGraph API webhooks**, a way to receive a POST callback when a specific run completes. If you are looking for **LangSmith automation webhooks** (triggered when automation rules match runs or threads), see [Configure webhook notifications for rules](/langsmith/webhooks).
+</Note>
+
 Webhooks enable event-driven communication from your LangSmith application to external services. For example, you may want to issue an update to a separate service once an API call to LangSmith has finished running.
 
 Many LangSmith endpoints accept a `webhook` parameter. If this parameter is specified by an endpoint that can accept POST requests, LangSmith will send a request at the completion of a run.
@@ -317,7 +321,7 @@ These tools help you verify that LangSmith is correctly triggering and sending w
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/use-webhooks.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

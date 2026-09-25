@@ -176,7 +176,7 @@ npx tsx index.ts
 
 ## 4. View your trace
 
-In the [LangSmith UI](https://smith.langchain.com?utm_source=docs&utm_medium=cta&utm_campaign=langsmith-signup&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Messages** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
+In the [LangSmith UI](https://smith.langchain.com?utm_source=docs&utm_medium=cta&utm_campaign=langsmith-signup&utm_content=langsmith-observability-quickstart), go to **Tracing** and select your **default** project. Click the `assistant` row to open the trace. The **Trajectory** tab shows the conversation as it was sent to the model. Select the **Details** tab to see the full run tree, including the `assistant` function with the `get_context` tool call and the OpenAI call nested inside it.
 
 <img
     className="block dark:hidden"
@@ -200,7 +200,7 @@ You can also inspect traces from the terminal using the [LangSmith CLI](/langsmi
 
 - [Tracing integrations](/langsmith/integrations): LangChain, LangGraph, Anthropic, and other providers.
 - [Trace an LLM application](/langsmith/observability-llm-tutorial): a full lifecycle tutorial, from prototyping through production.
-- [Filter traces](/langsmith/filter-traces-in-application): search and navigate large tracing projects.
+- [Filter traces](/langsmith/filter-traces): search and navigate large tracing projects.
 - [Log to a specific project](/langsmith/log-traces-to-project): send traces to a named project instead of **default**.
 
 <Callout type="info" icon="feather">
@@ -211,7 +211,7 @@ After logging traces, use **[Chat](/langsmith/chat)** to analyze them and get AI
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability-quickstart.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

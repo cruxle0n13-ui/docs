@@ -80,12 +80,12 @@ Available actions depend on the action providers configured on `AgentKit`. Commo
 ## Use within an agent
 
 ```python
+from langchain.agents import create_agent
 from langchain_openai import ChatOpenAI
-from langgraph.prebuilt import create_react_agent
 
 llm = ChatOpenAI(model="gpt-4o-mini")
 
-agent = create_react_agent(llm=llm, tools=tools)
+agent = create_agent(model=llm, tools=tools)
 ```
 
 For a full runnable example with a CDP smart wallet, see the [AgentKit LangChain chatbot example](https://github.com/coinbase/agentkit/blob/main/python/examples/langchain-cdp-smart-wallet-chatbot/chatbot.py).
@@ -102,7 +102,7 @@ For detailed documentation of configuration options and APIs:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/tools/cdp_agentkit.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -114,7 +114,7 @@ See a [usage example](/oss/python/integrations/vectorstores/memorydb).
 
 ### Valkey
 
-[Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Use ValkeyVectorStore to connect with [Amazon ElastiCache for Valkey](https://aws.amazon.com/elasticache/valkey/) or [Amazon MemoryDB for Valkey](https://aws.amazon.com/memorydb/).
+[Valkey](https://valkey.io/) is an open source, high-performance key/value datastore that supports workloads such as caching, message queues, and can act as a primary database. Use ValkeyVectorStore to connect with [Amazon ElastiCache for Valkey](https://aws.amazon.com/elasticache/) or [Amazon MemoryDB for Valkey](https://aws.amazon.com/memorydb/).
 
 ```python
 from langchain_aws.vectorstores import ValkeyVectorStore
@@ -168,13 +168,14 @@ from langchain_aws import AmazonKnowledgeBasesRetriever
 See a [usage example](/oss/python/integrations/tools/bedrock_agentcore_browser).
 
 ```python
+from langchain.agents import create_agent
 from langchain_aws.tools import create_browser_toolkit
 
 # Create toolkit
 toolkit, browser_tools = create_browser_toolkit(region="us-west-2")
 
 # Use with an agent
-agent = create_react_agent(model=llm, tools=browser_tools)
+agent = create_agent(model=llm, tools=browser_tools)
 result = await agent.ainvoke(
     {"messages": [{"role": "user", "content": "Go to example.com and get the heading"}]},
     config={"configurable": {"thread_id": "session-1"}}
@@ -202,13 +203,14 @@ await toolkit.cleanup()
 See a [usage example](/oss/python/integrations/tools/bedrock_agentcore_code_interpreter).
 
 ```python
+from langchain.agents import create_agent
 from langchain_aws.tools import create_code_interpreter_toolkit
 
 # Create toolkit (async)
 toolkit, code_tools = await create_code_interpreter_toolkit(region="us-west-2")
 
 # Use with an agent
-agent = create_react_agent(model=llm, tools=code_tools)
+agent = create_agent(model=llm, tools=code_tools)
 result = await agent.ainvoke(
     {"messages": [{"role": "user", "content": "Calculate factorial of 10"}]},
     config={"configurable": {"thread_id": "session-1"}}
@@ -216,6 +218,41 @@ result = await agent.ainvoke(
 
 # Cleanup when done
 await toolkit.cleanup()
+```
+
+### Amazon Bedrock AgentCore Web Search
+
+[Amazon Bedrock AgentCore Web Search](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/gateway-target-connector-web-search-tool.html) gives agents current information from the web with a source URL on every result, authenticated with your AWS credentials rather than a search API key.
+
+<CodeGroup>
+    ```bash pip
+    pip install langchain-aws bedrock-agentcore
+    ```
+
+    ```bash uv
+    uv add langchain-aws bedrock-agentcore
+    ```
+</CodeGroup>
+
+See a [usage example](/oss/python/integrations/tools/bedrock_agentcore_web_search).
+
+```python
+from langchain.agents import create_agent
+from langchain_aws.tools import create_web_search_toolkit
+
+# Needs a gateway with a web search connector target. The factory is synchronous.
+toolkit, tools = create_web_search_toolkit(
+    region="us-east-1",
+    gateway_id="my-web-search-gateway-abc123",
+)
+
+try:
+    agent = create_agent(model=llm, tools=tools)
+    result = agent.invoke(
+        {"messages": [{"role": "user", "content": "What changed in the most recent boto3 release?"}]}
+    )
+finally:
+    toolkit.close()
 ```
 
 ## Sandboxes
@@ -404,7 +441,7 @@ agentcore launch -e your_agent.py
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/python/integrations/providers/aws.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

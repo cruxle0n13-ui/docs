@@ -367,10 +367,7 @@ const callSupportAgent: GraphNode<typeof MultiAgentState.State> = async (state) 
 };
 
 // 5. Create router that checks if we should end or continue
-const routeAfterAgent: ConditionalEdgeRouter<
-  typeof MultiAgentState.State,
-  "sales_agent" | "support_agent"
-> = (state) => {
+const routeAfterAgent: ConditionalEdgeRouter<{ InputSchema: typeof MultiAgentState.State; Nodes: "sales_agent" | "support_agent" }> = (state) => {
   const messages = state.messages ?? [];
 
   // Check the last message - if it's an AIMessage without tool calls, we're done
@@ -386,10 +383,7 @@ const routeAfterAgent: ConditionalEdgeRouter<
   return active as "sales_agent" | "support_agent";
 };
 
-const routeInitial: ConditionalEdgeRouter<
-  typeof MultiAgentState.State,
-  "sales_agent" | "support_agent"
-> = (state) => {
+const routeInitial: ConditionalEdgeRouter<{ InputSchema: typeof MultiAgentState.State; Nodes: "sales_agent" | "support_agent" }> = (state) => {
   // Route to the active agent based on state, default to sales agent
   return (state.activeAgent ?? "sales_agent") as
     | "sales_agent"
@@ -507,7 +501,7 @@ As you design your multi-agent system, consider:
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/multi-agent/handoffs.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

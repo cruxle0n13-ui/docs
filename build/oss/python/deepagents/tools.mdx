@@ -7,7 +7,7 @@ import CustomizationToolsPy from '/snippets/python/code-samples/customization-to
 import CustomizationToolsJs from '/snippets/python/code-samples/customization-tools-js.mdx';
 import ToolsPassToolsPy from '/snippets/python/code-samples/tools-pass-tools-py.mdx';
 import ToolsPassToolsJs from '/snippets/python/code-samples/tools-pass-tools-js.mdx';
-import ToolsMcpPy from '/snippets/python/code-samples/tools-mcp-py.mdx';
+import ToolsMcpPy from '/snippets/python/code-samples/deepagents-mcp-tools-py.mdx';
 import ToolsMcpJs from '/snippets/python/code-samples/tools-mcp-js.mdx';
 
 Deep Agents can call any tool you define, any [LangChain tool](https://python.langchain.com/docs/concepts/tools/), and tools from any [MCP server](#mcp-tools).
@@ -39,11 +39,18 @@ For full details on defining and using LangChain tools (tool dicts, `StructuredT
 
 MCP is an open protocol that lets agents connect to a growing ecosystem of servers—databases, APIs, file systems, browsers, and more—through a standard interface. Instead of writing custom integration code for each service, you point Deep Agents at an MCP server and it gets all the tools that server exposes.
 
-Install `langchain-mcp-adapters` to connect to MCP servers:
+Install LangChain with the `mcp` extra to connect to MCP servers:
 
-```bash
-pip install langchain-mcp-adapters
+<CodeGroup>
+```bash pip
+pip install "langchain[mcp]"
 ```
+
+```bash uv
+uv add "langchain[mcp]"
+```
+</CodeGroup>
+
 
 <ToolsMcpPy />
 
@@ -86,7 +93,7 @@ Return a string for text-only results, or an ordered list of content blocks for 
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/tools.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

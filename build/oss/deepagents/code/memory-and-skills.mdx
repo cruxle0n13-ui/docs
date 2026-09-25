@@ -28,6 +28,8 @@ As you use the agent, it automatically stores information in `~/.deepagents/<age
 2. **Response**: Checks memory when uncertain during execution
 3. **Learning**: Automatically saves new information for future sessions
 
+To keep loading memory while stopping automatic saves, see [Automatic memory](/oss/deepagents/code/configuration#automatic-memory).
+
 The agent organizes its memories by topic with descriptive filenames:
 
 ```
@@ -83,7 +85,7 @@ Use a global `AGENTS.md` (`~/.deepagents/agent/AGENTS.md`) for:
 - General tone and communication style
 - Universal coding preferences (formatting, type hints, etc.)
 - Tool usage patterns that apply everywhere
-- Workflows and methodologies that don't change per-project
+- Workflows and methodologies that do not change per-project
 
 Use a project `AGENTS.md` (`.deepagents/AGENTS.md` in project root) for:
 
@@ -229,7 +231,7 @@ dcode skills info test-skill --project
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/deepagents/code/memory-and-skills.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

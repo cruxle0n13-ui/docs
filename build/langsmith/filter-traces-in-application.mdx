@@ -1,9 +1,14 @@
 ---
-title: Filter traces
-sidebarTitle: Filter traces
+title: Filter traces (ClickHouse)
+sidebarTitle: Filter traces (ClickHouse)
+description: Filter threads, traces, and runs in a LangSmith tracing project backed by ClickHouse, using the filter bar, filter shortcuts, and saved filters.
 ---
 
+import FilteringExperienceNote from '/snippets/python/langsmith/filtering-experience-note.mdx';
+
 Tracing projects can accumulate large amounts of data across [threads](/langsmith/observability-concepts#threads), [traces](/langsmith/observability-concepts#traces), and [runs](/langsmith/observability-concepts#runs). LangSmith's filtering tools let you navigate and analyze that data precisely.
+
+<FilteringExperienceNote />
 
 This page covers:
 
@@ -310,7 +315,7 @@ Extending the [tool call filtering example](#example-filtering-for-tool-calls), 
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/filter-traces-in-application.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

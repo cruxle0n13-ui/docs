@@ -30,7 +30,7 @@ Browse the complete collection of integrations available for JavaScript/TypeScri
     href="/oss/javascript/integrations/providers/google"
     icon="brand-google"
   >
-    Integrate with Google's AI services including Gemini and Vertex AI.
+    Integrate with Google's AI services including Gemini and Gemini Enterprise Agent Platform.
   </Card>
 
   <Card
@@ -85,6 +85,18 @@ Connect LangGraph agents to front ends and observability platforms.
     icon="link"
   >
     Observability and customer analytics for production AI agents.
+  </Card>
+</Columns>
+
+## Classification models
+
+<Columns cols={3}>
+  <Card
+    title="TypeSafe"
+    href="/oss/javascript/integrations/providers/typesafe"
+    icon="route"
+  >
+    Classify state into typed decisions and calibrated probabilities with Jev.
   </Card>
 </Columns>
 
@@ -182,7 +194,7 @@ Connect LangGraph agents to front ends and observability platforms.
     href="/oss/javascript/integrations/chat/google"
     icon="brand-google"
   >
-    Google's Gemini models via AI Studio and Vertex AI.
+    Google's Gemini models via AI Studio and Gemini Enterprise Agent Platform.
   </Card>
 
   <Card
@@ -193,6 +205,13 @@ Connect LangGraph agents to front ends and observability platforms.
     Ultra-fast inference with Groq's specialized hardware.
   </Card>
 
+  <Card
+    title="Interfaze"
+    href="https://interfaze.ai/docs"
+    icon="link"
+  >
+    Multimodal chat model with structured output over an OpenAI-compatible API.
+  </Card>
 
   <Card
     title="Mistral"
@@ -235,6 +254,13 @@ Connect LangGraph agents to front ends and observability platforms.
     Open-weight chat and multimodal models with image and video input over SCX's OpenAI-compatible API.
   </Card>
 
+  <Card
+    title="Tuning Engines"
+    href="https://www.tuningengines.com/"
+    icon="link"
+  >
+    Governed OpenAI-compatible endpoint for model access, policy checks, and usage accounting.
+  </Card>
 
   <Card
     title="xAI"
@@ -282,7 +308,7 @@ Connect LangGraph agents to front ends and observability platforms.
 
 
   <Card
-    title="Google Vertex AI"
+    title="Gemini Enterprise Agent Platform"
     href="/oss/javascript/integrations/llms/google_vertex_ai"
     icon="brand-google"
   >
@@ -381,11 +407,11 @@ Connect LangGraph agents to front ends and observability platforms.
   </Card>
 
   <Card
-    title="Google Vertex AI"
+    title="Gemini Enterprise Agent Platform"
     href="/oss/javascript/integrations/embeddings/google_vertex_ai"
     icon="brand-google"
   >
-    Enterprise embedding models through Vertex AI.
+    Enterprise embedding models through Gemini Enterprise Agent Platform.
   </Card>
 
 
@@ -448,6 +474,13 @@ Connect LangGraph agents to front ends and observability platforms.
   </Card>
 
   <Card
+    title="SAP HANA Internal Embeddings"
+    href="/oss/javascript/integrations/vectorstores/sap_hanavector"
+  >
+    SAP HANA Cloud's built-in embedding models for in-database vector generation.
+  </Card>
+
+  <Card
     title="SCX"
     href="https://scx.ai/"
   >
@@ -503,6 +536,14 @@ Connect LangGraph agents to front ends and observability platforms.
   </Card>
 
   <Card
+    title="LambdaDB"
+    href="https://docs.lambdadb.ai/guides/get-started/quickstart"
+    icon="link"
+  >
+    Serverless database for RAG and agents.
+  </Card>
+
+  <Card
     title="Memory Vector Store"
     href="/oss/javascript/integrations/vectorstores/memory"
   >
@@ -545,6 +586,13 @@ Connect LangGraph agents to front ends and observability platforms.
     href="/oss/javascript/integrations/vectorstores/redis"
   >
     In-memory database with vector search capabilities.
+  </Card>
+
+  <Card
+    title="SAP HANA Cloud Vector Engine"
+    href="/oss/javascript/integrations/vectorstores/sap_hanavector"
+  >
+    Vector store fully integrated into the SAP HANA Cloud database.
   </Card>
 
 
@@ -697,11 +745,43 @@ Connect LangGraph agents to front ends and observability platforms.
 <Columns cols={3}>
 
   <Card
+    title="aiworker"
+    href="https://github.com/ai-worker227/aiworker-examples/tree/main/langchain"
+    icon="link"
+  >
+    Paid data tools (DeFi yields, page-to-Markdown, Base token and wallet checks, Polymarket odds, history and backtests, fact checks, headline search) built from aiworker's live OpenAPI catalogue; each call pays itself in USDC over the x402 protocol from the agent's wallet, no API key.
+  </Card>
+
+  <Card
+    title="Atomic Mail"
+    href="https://docs.atomicmail.ai/langchain"
+    icon="link"
+  >
+    Email toolkit that provisions an agent-owned inbox by proof of work and sends and receives over JMAP.
+  </Card>
+
+  <Card
     title="Azure Dynamic Sessions"
     href="/oss/javascript/integrations/tools/azure_dynamic_sessions"
     icon="brand-windows"
   >
     Secure code execution in Azure Dynamic Sessions.
+  </Card>
+
+  <Card
+    title="Continuity tools"
+    href="https://github.com/zerohourzulu/continuity/blob/main/packages/remote-tools/README.md#langchain-tools"
+    icon="link"
+  >
+    LangChain tools with application-defined permissions, stable operation identities and status-only recovery for cooperating services.
+  </Card>
+
+  <Card
+    title="Corsair"
+    href="https://docs.corsair.dev/mcp-adapters/langchain"
+    icon="link"
+  >
+    Exposes 200+ service integrations (Slack, GitHub, Gmail, Linear, Stripe, and others) to LangChain agents as tools. OAuth runs server-side and credentials stay in the developer's own database.
   </Card>
 
 
@@ -752,6 +832,14 @@ Connect LangGraph agents to front ends and observability platforms.
   </Card>
 
   <Card
+    title="Magic Hour"
+    href="https://docs.magichour.ai"
+    icon="link"
+  >
+    AI text-to-video, image-to-video, and image generation tools behind one API key.
+  </Card>
+
+  <Card
     title="MCP Toolbox"
     href="/oss/javascript/integrations/tools/mcp_toolbox"
   >
@@ -786,6 +874,38 @@ Connect LangGraph agents to front ends and observability platforms.
     href="/oss/javascript/integrations/tools/perplexity_search"
   >
     Web search results from the Perplexity Search API.
+  </Card>
+
+  <Card
+    title="Pushary"
+    href="https://github.com/Pushary/pushary-langgraph"
+    icon="link"
+  >
+    Customer confirmation, choice and text input through an enrolled Pushary mobile app, exposed as a LangChain structured tool.
+  </Card>
+
+  <Card
+    title="Serpex"
+    href="https://serpex.dev/docs"
+    icon="link"
+  >
+    Multi-engine web search API for AI applications and data aggregation.
+  </Card>
+
+  <Card
+    title="SIGNA"
+    href="https://github.com/codexvritra/signa/tree/main/sdk/langchain"
+    icon="link"
+  >
+    Add wallet-signed messaging tools to LangChain agents.
+  </Card>
+
+  <Card
+    title="Sato Hub"
+    href="https://github.com/satohubai/sato-hub-integrations/tree/main/packages/satohub-langchain-tools#readme"
+    icon="link"
+  >
+    Four keyless tools over Sato Hub's daily-rebuilt index of onchain-agent building blocks: search listings, run a Preflight lookup on a repo, package, MCP endpoint or token, get a swap-venue recommendation with the fee stated, and turn a goal into a build plan of listed projects.
   </Card>
 
   <Card
@@ -824,10 +944,24 @@ Connect LangGraph agents to front ends and observability platforms.
     AI-optimized search for retrieval applications.
   </Card>
 
+  <Card
+    title="Tavily Research"
+    href="/oss/javascript/integrations/tools/tavily_research"
+  >
+    Comprehensive research on a given topic with Tavily.
+  </Card>
+
+  <Card
+    title="Tavily GET Research"
+    href="/oss/javascript/integrations/tools/tavily_get_research"
+  >
+    Retrieve status and results of a research task using its request ID.
+  </Card>
 
   <Card
     title="You.com"
-    href="/oss/javascript/integrations/tools/youdotcom"
+    href="https://you.com/docs/integrations/langchain"
+    icon="link"
   >
     Real-time web search and content extraction for LLMs.
   </Card>
@@ -862,6 +996,14 @@ Connect LangGraph agents to front ends and observability platforms.
   </Card>
 
   <Card
+    title="FoxNose"
+    href="https://github.com/FoxNoseTech/langchain-foxnose-js#readme"
+    icon="link"
+  >
+    Retriever, document loader and agent tool for FoxNose collections, with text, vector, hybrid and vector-boosted search over the Flux delivery API.
+  </Card>
+
+  <Card
     title="HyDE"
     href="/oss/javascript/integrations/retrievers/hyde"
   >
@@ -882,6 +1024,13 @@ Connect LangGraph agents to front ends and observability platforms.
     href="/oss/javascript/integrations/retrievers/perplexity_search"
   >
     Retriever returning Documents from the Perplexity Search API.
+  </Card>
+
+  <Card
+    title="SAP HANA Self Query"
+    href="/oss/javascript/integrations/retrievers/self_query/hanavector_self_query"
+  >
+    Self-querying retriever over SAP HANA Cloud Vector Engine.
   </Card>
 
 
@@ -940,6 +1089,14 @@ Connect LangGraph agents to front ends and observability platforms.
 
 <Columns cols={3}>
   <Card
+    title="OpenInference"
+    href="https://arize.com/docs/ax/integrations/python-agent-frameworks/langchain/langchain-tracing"
+    icon="link"
+  >
+    OpenTelemetry instrumentation that records LangChain and LangGraph operations using OpenInference semantic conventions.
+  </Card>
+
+  <Card
     title="Respan"
     href="https://www.respan.ai/docs"
     icon="link"
@@ -961,7 +1118,7 @@ Connect LangGraph agents to front ends and observability platforms.
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/javascript/integrations/providers/all_providers.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

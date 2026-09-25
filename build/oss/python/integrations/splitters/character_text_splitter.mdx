@@ -9,8 +9,8 @@ Character-based splitting is the simplest approach to text splitting. It divides
 2. **How chunk size is measured**: by character count.
 
 You can choose between:
-- `.split_text` — returns plain string chunks.
-- `.create_documents` — returns LangChain [Document](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects, useful when metadata needs to be preserved for downstream tasks.
+- `.split_text`: returns plain string chunks.
+- `.create_documents`: returns LangChain [Document](https://reference.langchain.com/python/langchain-core/documents/base/Document) objects, useful when metadata needs to be preserved for downstream tasks.
 
 
 
@@ -71,7 +71,7 @@ text_splitter.split_text(state_of_the_union)[0]
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/integrations/splitters/character_text_splitter.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

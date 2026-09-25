@@ -1113,7 +1113,7 @@ Note that:
 
 ## Create branches
 
-Parallel execution of nodes is essential to speed up overall graph operation. LangGraph offers native support for parallel execution of nodes, which can significantly enhance the performance of graph-based workflows. This parallelization is achieved through fan-out and fan-in mechanisms, utilizing both standard edges and [conditional_edges](https://langchain-ai.github.io/langgraph/reference/graphs.md#langgraph.graph.MessageGraph.add_conditional_edges). Below are some examples showing how to add create branching dataflows that work for you.
+Parallel execution of nodes is essential to speed up overall graph operation. LangGraph offers native support for parallel execution of nodes, which can significantly enhance the performance of graph-based workflows. This parallelization is achieved through fan-out and fan-in mechanisms, utilizing both standard edges and [conditional_edges](https://reference.langchain.com/javascript/classes/_langchain_langgraph.index.StateGraph.html#addConditionalEdges). Below are some examples showing how to add create branching dataflows that work for you.
 
 ### Run graph nodes in parallel
 
@@ -1215,7 +1215,7 @@ Importantly, updates from a parallel superstep may not be ordered consistently. 
   If you have error-prone (perhaps want to handle flakey API calls), LangGraph provides two ways to address this:
 
   1. You can write regular python code within your node to catch and handle exceptions.
-  2. You can set a **[retry_policy](https://langchain-ai.github.io/langgraph/reference/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
+  2. You can set a **[`RetryPolicy`](https://reference.langchain.com/python/langgraph/types/#langgraph.types.RetryPolicy)** to direct the graph to retry nodes that raise certain types of exceptions. Only failing branches are retried, so you needn't worry about performing redundant work.
 
   Together, these let you perform parallel execution and fully control exception handling.
 </Accordion>
@@ -1269,7 +1269,7 @@ const nodeC: GraphNode<typeof State> = (state) => {
   return { aggregate: ["C"] };  // [!code highlight]
 };
 
-const conditionalEdge: ConditionalEdgeRouter<typeof State, "b" | "c"> = (state) => {
+const conditionalEdge: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "b" | "c" }> = (state) => {
   // Fill in arbitrary logic here that uses the state
   // to determine the next node
   return state.which as "b" | "c";
@@ -1314,7 +1314,7 @@ Your conditional edges can route to multiple destination nodes. For example:
 
 
 ```typescript
-const routeBcOrCd: ConditionalEdgeRouter<typeof State, "b" | "c" | "d"> = (state) => {
+const routeBcOrCd: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "b" | "c" | "d" }> = (state) => {
   if (state.which === "cd") {
     return ["c", "d"];
   }
@@ -1357,7 +1357,7 @@ const generateJoke: GraphNode<typeof OverallState> = (state) => {
   return { jokes: [jokeMap[state.subject]] };
 };
 
-const continueToJokes: ConditionalEdgeRouter<typeof OverallState, "generateJoke"> = (state) => {
+const continueToJokes: ConditionalEdgeRouter<{ InputSchema: typeof OverallState; Nodes: "generateJoke" }> = (state) => {
   return state.subjects.map((subject) => new Send("generateJoke", { subject }));
 };
 
@@ -1422,7 +1422,7 @@ When creating a loop, you can include a conditional edge that specifies a termin
 
 
 ```typescript
-const route: ConditionalEdgeRouter<typeof State, "b"> = (state) => {
+const route: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "b" }> = (state) => {
   if (terminationCondition(state)) {
     return END;
   } else {
@@ -1483,7 +1483,7 @@ const nodeB: GraphNode<typeof State> = (state) => {
 };
 
 // Define edges
-const route: ConditionalEdgeRouter<typeof State, "b"> = (state) => {
+const route: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "b" }> = (state) => {
   if (state.aggregate.length < 7) {
     return "b";
   } else {
@@ -1572,7 +1572,7 @@ Recursion Error
 
 ## Combine control flow and state updates with `Command`
 
-It can be useful to combine control flow (edges) and state updates (nodes). For example, you might want to BOTH perform state updates AND decide which node to go to next in the SAME node. LangGraph provides a way to do so by returning a [Command](https://langchain-ai.github.io/langgraph/reference/types/#langgraph.types.Command) object from node functions:
+It can be useful to combine control flow (edges) and state updates (nodes). For example, you might want to BOTH perform state updates AND decide which node to go to next in the SAME node. LangGraph provides a way to do so by returning a [Command](https://reference.langchain.com/javascript/langchain-langgraph/index/Command) object from node functions:
 
 
 
@@ -1605,7 +1605,7 @@ const State = new StateSchema({
 
 // Define the nodes
 
-const nodeA: GraphNode<typeof State, "nodeB" | "nodeC"> = (state) => {
+const nodeA: GraphNode<{ InputSchema: typeof State; Nodes: "nodeB" | "nodeC" }> = (state) => {
   console.log("Called A");
   const value = Math.random() > 0.5 ? "b" : "c";
   // this is a replacement for a conditional edge function
@@ -1710,7 +1710,7 @@ const State = new StateSchema({
   ),
 });
 
-const nodeA: GraphNode<typeof State, "nodeB" | "nodeC"> = (state) => {
+const nodeA: GraphNode<{ InputSchema: typeof State; Nodes: "nodeB" | "nodeC" }> = (state) => {
   console.log("Called A");
   const value = Math.random() > 0.5 ? "nodeB" : "nodeC";
 
@@ -1809,7 +1809,7 @@ If you are using tools that update state via [`Command`](https://reference.langc
 
 Here we demonstrate how to visualize the graphs you create.
 
-You can visualize any arbitrary [Graph](https://langchain-ai.github.io/langgraph/reference/graphs/), including [StateGraph](https://langchain-ai.github.io/langgraph/reference/graphs/#langgraph.graph.state.StateGraph).
+You can visualize any arbitrary [Graph](https://reference.langchain.com/python/langgraph/graphs/), including [`StateGraph`](https://reference.langchain.com/javascript/langchain-langgraph/index/StateGraph).
 
 
 
@@ -1835,7 +1835,7 @@ const node2: GraphNode<typeof State> = (state) => {
   return { value: state.value * 2 };
 };
 
-const router: ConditionalEdgeRouter<typeof State, "node2"> = (state) => {
+const router: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "node2" }> = (state) => {
   if (state.value < 10) {
     return "node2";
   }
@@ -1900,7 +1900,7 @@ await fs.writeFile("graph.png", imageBuffer);
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/use-graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -18,6 +18,10 @@ import LanggraphGraphApiReducersAppendStringsJs from '/snippets/javascript/code-
 import LanggraphGraphApiReducersAppendStringsPy from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-append-strings-py.mdx';
 import LanggraphGraphApiReducersCustomStateJs from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-custom-state-js.mdx';
 import LanggraphGraphApiReducersCustomStatePy from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-custom-state-py.mdx';
+import LanggraphGraphApiReducersMergeDoesNotClearJs from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-merge-does-not-clear-js.mdx';
+import LanggraphGraphApiReducersMergeDoesNotClearPy from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-merge-does-not-clear-py.mdx';
+import LanggraphGraphApiReducersOverwriteClearPy from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-overwrite-clear-py.mdx';
+import LanggraphGraphApiReducersReplaceJs from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-replace-js.mdx';
 import LanggraphGraphApiReducersDefaultStateJs from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-default-state-js.mdx';
 import LanggraphGraphApiReducersDefaultStatePy from '/snippets/javascript/code-samples/langgraph-graph-api-reducers-default-state-py.mdx';
 
@@ -252,6 +256,22 @@ In this example, we've used `ReducedValue` to specify a reducer function for the
 
 
 
+#### Resetting a reducer field
+
+A common source of confusion with reducers: with a merging reducer, returning an empty value does **not** clear the field. Because the reducer merges the right argument into the left one, an empty update is merged in and previously accumulated values are kept.
+
+This pattern matters for error buffers or retry counters that must be cleared between retry attempts:
+
+
+
+<LanggraphGraphApiReducersMergeDoesNotClearJs />
+
+To let a node reset (clear) the field, define a custom reducer that replaces the accumulated value instead of merging it:
+
+<LanggraphGraphApiReducersReplaceJs />
+
+
+
 ### Untracked values
 
 `UntrackedValue` is used for state fields that should exist during graph execution but should **never be checkpointed**. When a graph resumes from a checkpoint, untracked values will be reset to their initial state (or be unavailable).
@@ -323,7 +343,7 @@ const fetchNode: GraphNode<typeof State> = async (state, config) => {
 };
 
 // Node with Command routing - specify valid destinations
-const routerNode: GraphNode<typeof State, "process" | "done"> = (state) => {
+const routerNode: GraphNode<{ InputSchema: typeof State; Nodes: "process" | "done" }> = (state) => {
   if (state.count >= 10) {
     return new Command({ goto: "done" });
   }
@@ -362,7 +382,7 @@ const State = new StateSchema({
 });
 
 // Router returns node name(s) or END
-const router: ConditionalEdgeRouter<typeof State, "process" | "summarize"> = (state) => {
+const router: ConditionalEdgeRouter<{ InputSchema: typeof State; Nodes: "process" | "summarize" }> = (state) => {
   if (!state.shouldContinue) {
     return END;
   }
@@ -394,7 +414,7 @@ type MyUpdate = typeof MyStateSchema.Update;
 // { messages?: Messages, count?: number }
 ```
 
-
+:::
 
 ### Working with messages in graph state
 
@@ -1184,7 +1204,7 @@ To trace, debug and evaluate your agents, use [LangSmith](/langsmith/observabili
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/graph-api.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

@@ -133,7 +133,7 @@ In production, use a checkpointer backed by a database:
 
   <Tip>
   **Setup**
-  To use `MongoDBSaver`, you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one.
+  To use `MongoDBSaver`, you will need a MongoDB cluster. Follow [this guide](https://www.mongodb.com/docs/guides/atlas/cluster/) to create a cluster if you don't already have one. For an agent-focused walkthrough, see [short-term memory with MongoDB Atlas](/oss/javascript/integrations/memory/mongodb-short-term-memory).
   </Tip>
 
   ```typescript
@@ -401,6 +401,10 @@ In production, use a store backed by a database:
   ```
   npm install @langchain/langgraph-checkpoint-mongodb
   ```
+
+  <Tip>
+  For an agent-focused walkthrough, see [long-term memory with MongoDB Atlas](/oss/javascript/integrations/memory/mongodb-long-term-memory).
+  </Tip>
 
   ```typescript
   import { ChatAnthropic } from "@langchain/anthropic";
@@ -1001,7 +1005,7 @@ const summarizeConversation: GraphNode<typeof State> = async (state) => {
   };
 
   // We now define the logic for determining whether to end or summarize the conversation
-  const shouldContinue: ConditionalEdgeRouter<typeof GraphState, "summarize_conversation"> = (state) => {
+  const shouldContinue: ConditionalEdgeRouter<{ InputSchema: typeof GraphState; Nodes: "summarize_conversation" }> = (state) => {
     const messages = state.messages;
     // If there are more than six messages, then we summarize the conversation
     if (messages.length > 6) {
@@ -1152,7 +1156,7 @@ We recommend running migrations as a dedicated deployment step, or you can ensur
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langgraph/add-memory.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

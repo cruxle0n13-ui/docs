@@ -12,7 +12,7 @@ import HostingSetup from '/snippets/python/langsmith/platform-setup-note.mdx';
 <div class="mdx-content prose prose-gray dark:prose-invert mx-4 pt-10">
 <h1 class="flex whitespace-pre-wrap group font-semibold text-2xl sm:text-3xl mt-8">LangSmith Observability</h1>
 
-LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics.
+LangSmith Observability provides full visibility into your LLM application: from individual traces to production-wide performance metrics. Traces are the record of what your agents did in production. Use them to debug failures, monitor quality, and build the datasets you evaluate against.
 
 <Callout icon="plug" color="#4F46E5" iconType="regular">
 LangSmith works with many frameworks and providers. Browse [available integrations](/langsmith/integrations) to connect your stack including OpenAI, Anthropic, CrewAI, Vercel AI SDK, Pydantic AI, and more.
@@ -50,10 +50,10 @@ Once your account and API key are ready, set up tracing:
   <Card
     title="View traces"
     icon="route"
-    href="/langsmith/filter-traces-in-application"
+    href="/langsmith/view-traces"
     arrow="true"
   >
-    Filter, export, share, and compare traces via the UI or API.
+    Inspect threads and runs in the Messages, Turns, and Details views.
   </Card>
 
   <Card
@@ -103,7 +103,7 @@ For terminology and core concepts, refer to [Observability concepts](/langsmith/
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/langsmith/observability.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

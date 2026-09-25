@@ -3,6 +3,9 @@ title: Contributing to code
 sidebarTitle: Code
 ---
 
+import ConnectDocsMcpPrompt from '/snippets/python/connect-docs-mcp-prompt.mdx';
+import InstallLangchainSkillsPrompt from '/snippets/python/install-langchain-skills-prompt.mdx';
+
 Code contributions are welcome! Whether you're fixing bugs, adding features, or improving performance, your contributions help deliver a better developer experience for thousands of developers.
 
 ## Getting started
@@ -44,16 +47,20 @@ For simple bugfixes, you can get started immediately:
         git clone https://github.com/parrot123/langchain.git
         ```
 
+        <Warning>
+            The LangChain Python repo is a **monorepo** — there is no `pyproject.toml` at the repo root. Each package has its own under `libs/` (e.g. `libs/core/`, `libs/langchain/`, `libs/partners/openai/`). You must `cd` into the relevant package directory before running `uv` commands.
+        </Warning>
+
         ```bash
-        # Inside your repo, initialize environment and install dependencies
-        uv venv && source .venv/bin/activate
+        # Navigate into the package you want to work on, then install dependencies
+        cd libs/core          # or libs/langchain, libs/partners/openai, etc.
         uv sync --all-groups
 
         # or, to install a specific group only:
         uv sync --group test
         ```
 
-        You will need to install [`uv`](https://docs.astral.sh/uv/) if you haven't previously
+        You will need to install [`uv`](https://docs.astral.sh/uv/) if you haven't previously. See the [repository structure](#repository-structure) section for a full list of packages and their locations.
 
 
     </Step>
@@ -227,7 +234,14 @@ Security checklist:
 ## Development environment
 
 <Tip>
-    **Using an AI coding agent?** Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the "Copy page" button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+    **Using an AI coding agent?**
+
+    - Install the [LangChain Docs MCP servers](/use-these-docs) to give your agent access to up-to-date LangChain documentation and examples.
+
+      <ConnectDocsMcpPrompt />
+    - Install [LangChain Skills](https://github.com/langchain-ai/langchain-skills) to improve your agent's performance on LangChain ecosystem tasks, then click the **Copy page** button on the top right of this page and paste the raw content into your agent to have it set up your environment automatically.
+
+      <InstallLangchainSkillsPrompt />
 </Tip>
 
 Our Python projects use [`uv`](https://docs.astral.sh/uv/getting-started/installation/) for dependency management. Make sure you have the latest version installed.
@@ -279,7 +293,6 @@ Once you've reviewed the [contribution guidelines](#contribution-guidelines), fi
                 - **[`langchain-standard-tests`](https://github.com/langchain-ai/langchain/tree/master/libs/standard-tests#readme)**: Standard test suites for integrations
 
 
-
             </Accordion>
         </AccordionGroup>
     </Tab>
@@ -315,7 +328,7 @@ Once you've reviewed the [contribution guidelines](#contribution-guidelines), fi
             </Accordion>
 
             <Accordion title="Integration packages">
-                - **[`deepagents-harbor`](https://github.com/langchain-ai/deepagents/tree/main/libs/harbor#readme)** (located in `libs/harbor/`): Harbor integration with LangSmith tracing
+                - **[`deepagents-evals`](https://github.com/langchain-ai/deepagents/tree/main/libs/evals#readme)** (located in `libs/evals/`): Evaluation suite and Harbor integration with LangSmith tracing
                 - **[`deepagents-acp`](https://github.com/langchain-ai/deepagents/tree/main/libs/acp#readme)** (located in `libs/acp/`): Agent Client Protocol integration
             </Accordion>
         </AccordionGroup>
@@ -698,7 +711,7 @@ Our goal is to have the most accessible developer setup possible. Should you exp
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/contributing/code.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).

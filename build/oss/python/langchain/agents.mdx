@@ -6,6 +6,8 @@ import AgentInvocationThreadAndContextJs from '/snippets/python/code-samples/age
 import AgentInvocationThreadAndContextPy from '/snippets/python/code-samples/agent-invocation-thread-and-context-py.mdx';
 import AgentInvocationThreadIdJs from '/snippets/python/code-samples/agent-invocation-thread-id-js.mdx';
 import AgentInvocationThreadIdPy from '/snippets/python/code-samples/agent-invocation-thread-id-py.mdx';
+import AgentsAgentStateJs from '/snippets/python/code-samples/agents-agent-state-js.mdx';
+import AgentsAgentStatePy from '/snippets/python/code-samples/agents-agent-state-py.mdx';
 import AgentsContextManagementJs from '/snippets/python/code-samples/agents-context-management-js.mdx';
 import AgentsContextManagementPy from '/snippets/python/code-samples/agents-context-management-py.mdx';
 import AgentsExecutionEnvironmentJs from '/snippets/python/code-samples/agents-execution-environment-js.mdx';
@@ -59,6 +61,10 @@ The job of a harness: get the model the right context at the right time for the 
 
 Building on that, you can configure the basics directly with the `model=`, `tools=`, and `system_prompt=` parameters. For more advanced capabilities, extend the harness with [middleware](#configure-the-harness).
 
+<Tip>
+[Deep Agents](/oss/python/deepagents/overview) builds on `create_agent` and comes with commonly useful capabilities already assembled, such as planning, file system tools, subagents, and memory. Use `create_agent` when you need to configure the harness yourself.
+</Tip>
+
 ## Core components
 
 <img
@@ -100,6 +106,27 @@ Shape how the agent approaches tasks. The system prompt parameter accepts a stri
 Return a validated schema from the agent using `response_format=`. See [Structured output](/oss/python/langchain/structured-output) for strategies and examples.
 
 <AgentsStructuredOutputPy />
+
+
+
+
+### Agent state
+
+Every agent manages its execution context through [`AgentState`](https://reference.langchain.com/python/langchain/agents/middleware/types/AgentState), a typed dictionary that holds the current conversation history and any custom fields your tools and middleware need.
+
+The built-in field is:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `messages` | `list[BaseMessage]` | The full conversation history for the current thread. Append-only: new messages are added, never replaced. |
+
+`AgentState` is also the type signature for every node-style middleware hook (`before_model`, `after_model`, and similar). Hooks receive the current state and can return a dict of updates to merge back into it.
+
+To add custom fields (for example, a `user_id` or a counter), subclass `AgentState` and pass the subclass to `create_agent` via `state_schema=`:
+
+<AgentsAgentStatePy />
+
+For full details, examples, and middleware-level state schemas, see [Short-term memory](/oss/python/langchain/short-term-memory#customizing-agent-memory) and [Custom middleware](/oss/python/langchain/middleware/custom#state-updates).
 
 
 
@@ -197,6 +224,22 @@ Agents are especially useful when they can take action rather than just generate
 
 See [`FilesystemMiddleware`](https://reference.langchain.com/python/deepagents/middleware/filesystem/FilesystemMiddleware), [Sandboxes](/oss/python/deepagents/sandboxes), [Interpreters](/oss/python/deepagents/interpreters).
 
+<Note>
+This example imports from the `deepagents` package. Install it with:
+
+<CodeGroup>
+  ```bash pip
+  pip install deepagents
+  ```
+
+  ```bash uv
+  uv add deepagents
+  ```
+</CodeGroup>
+
+
+</Note>
+
 ### Context management
 
 Every model call has a fixed context window. As an agent runs, that window fills with accumulating history, tool results, and intermediate steps. Summarization compresses history before overflow hits; memory loads persistent instructions at startup so knowledge carries across sessions; skills surface domain knowledge on demand rather than loading everything upfront.
@@ -208,6 +251,22 @@ Every model call has a fixed context window. As an agent runs, that window fills
 
 See [`SummarizationMiddleware`](https://reference.langchain.com/python/langchain/agents/middleware/summarization/SummarizationMiddleware), [`MemoryMiddleware`](https://reference.langchain.com/python/deepagents/middleware/memory/MemoryMiddleware), [Skills](/oss/python/langchain/multi-agent/skills), [Context engineering](/oss/python/deepagents/context-engineering).
 
+<Note>
+This example imports from the `deepagents` package. Install it with:
+
+<CodeGroup>
+  ```bash pip
+  pip install deepagents
+  ```
+
+  ```bash uv
+  uv add deepagents
+  ```
+</CodeGroup>
+
+
+</Note>
+
 ### Planning and delegation
 
 Complex tasks often exceed what one context window can handle. Delegation lets the main agent break work into pieces, hand them to subagents that each run in their own isolated context, and stay focused on coordination rather than execution. Work can run in parallel; the main agent's context stays clean.
@@ -217,6 +276,22 @@ Complex tasks often exceed what one context window can handle. Delegation lets t
 
 
 See [Subagents](/oss/python/langchain/multi-agent/subagents).
+
+<Note>
+This example imports from the `deepagents` package. Install it with:
+
+<CodeGroup>
+  ```bash pip
+  pip install deepagents
+  ```
+
+  ```bash uv
+  uv add deepagents
+  ```
+</CodeGroup>
+
+
+</Note>
 
 ### Name your agent
 
@@ -284,7 +359,7 @@ See [`HumanInTheLoopMiddleware`](https://reference.langchain.com/python/langchai
 
 <div className="source-links">
 <Callout icon="terminal-2">
-    [Connect these docs](/use-these-docs) to Claude, VSCode, and more via MCP for real-time answers.
+    [Connect these docs](/use-these-docs) to your agent of choice via MCP for real-time answers.
 </Callout>
 <Callout icon="edit">
     [Edit this page on GitHub](https://github.com/langchain-ai/docs/edit/main/src/oss/langchain/agents.mdx) or [file an issue](https://github.com/langchain-ai/docs/issues/new/choose).
